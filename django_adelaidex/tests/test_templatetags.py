@@ -2,10 +2,10 @@ from django.test import TestCase
 from django.template.base import Template
 from django.template.context import Context
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model
 import re
 
 from django_adelaidex.templatetags import pagination
-from django_adelaidex.lti.models import User
 
 # ref https://github.com/django/django/blob/master/django/contrib/flatpages/tests/test_templatetags.py
 class DictFilterTests(TestCase):
@@ -45,7 +45,7 @@ class PaginationTests(TestCase):
 
     def test_empty_pagination(self):
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
         page = paginator.page(1)
         context = pagination.pagination(page)
         self.assertEqual(context['num_pages'], 1)
@@ -56,8 +56,8 @@ class PaginationTests(TestCase):
 
     def test_single_pagination(self):
 
-        User.objects.create(username="user")
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        get_user_model().objects.create(username="user")
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
         page = paginator.page(1)
         context = pagination.pagination(page)
         self.assertEqual(context['num_pages'], 1)
@@ -75,9 +75,9 @@ class PaginationTests(TestCase):
         after_current_pages = 8
 
         for x in range(0, numpages * self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         for x in range(1, begin_pages+1):
             page = paginator.page(x)
@@ -98,9 +98,9 @@ class PaginationTests(TestCase):
         after_current_pages = 6
 
         for x in range(0, numpages * self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         for x in range(numpages/2, numpages/2 + before_current_pages):
             page = paginator.page(x)
@@ -121,9 +121,9 @@ class PaginationTests(TestCase):
         after_current_pages = 4
 
         for x in range(0, numpages * self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         for x in range(numpages - end_pages - 1, numpages+1):
             page = paginator.page(x)
@@ -144,9 +144,9 @@ class PaginationTests(TestCase):
         after_current_pages = 3
 
         for x in range(0, numpages * self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         for x in range(1, begin_pages+1):
             page = paginator.page(x)
@@ -184,7 +184,7 @@ class PaginationIntegrationTests(TestCase):
         self.perpage = 10
 
     def test_empty_page(self):
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         t = Template('{% load pagination %}{% pagination page_obj %}')
         c = Context({"page_obj": paginator.page(1)})
@@ -194,9 +194,9 @@ class PaginationIntegrationTests(TestCase):
 
     def test_single_page_template(self):
         for x in range(0, self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         t = Template('{% load pagination %}{% pagination page_obj %}')
         c = Context({"page_obj": paginator.page(1)})
@@ -206,9 +206,9 @@ class PaginationIntegrationTests(TestCase):
 
     def test_three_page_template(self):
         for x in range(0, 3 * self.perpage):
-            User.objects.create(username="user%s" % x)
+            get_user_model().objects.create(username="user%s" % x)
 
-        paginator = Paginator(User.objects.all(), per_page=self.perpage)
+        paginator = Paginator(get_user_model().objects.all(), per_page=self.perpage)
 
         t = Template('{% load pagination %}{% pagination page_obj %}')
         c = Context({"page_obj": paginator.page(1)})

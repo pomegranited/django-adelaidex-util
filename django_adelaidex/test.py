@@ -166,9 +166,6 @@ class TestOverrideSettings(object):
             except ImportError:
                 pass # ignore
 
-        # Need to reload all app urls
-        #reload('django_adelaidex.lti.urls')
-
         return import_module(settings.ROOT_URLCONF)
 
 

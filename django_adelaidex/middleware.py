@@ -25,5 +25,8 @@ class P3PMiddleware(object):
     '''IE privacy headers'''
 
     def process_response(self, request, response):
-        response[settings.P3P_HEADER_KEY] = settings.P3P_HEADER_VALUE
+        key = getattr(settings, 'P3P_HEADER_KEY', None)
+        val = getattr(settings, 'P3P_HEADER_VALUE', None)
+        if key:
+            response[key] = val
         return response

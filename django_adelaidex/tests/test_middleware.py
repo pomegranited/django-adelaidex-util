@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.test.utils import override_settings
 from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.http import Http404, HttpResponse
@@ -50,6 +51,12 @@ class P3PMiddlewareTest(TestCase):
         self.request = Mock()
         self.response = HttpResponse()
 
+    def test_not_set(self):
+        self.p3p.process_response(self.request, self.response)
+        self.assertNotIn('P3P:CP', self.response)
+
+    @override_settings(P3P_HEADER_KEY='P3P:CP')
+    @override_settings(P3P_HEADER_VALUE='IDC DSP')
     def test_response_header_present(self):
         self.p3p.process_response(self.request, self.response)
         self.assertEqual(self.response[settings.P3P_HEADER_KEY], settings.P3P_HEADER_VALUE)

@@ -40,3 +40,18 @@ Usage
         os.path.join( SITE_PACKAGES_INSTALL_DIR, 'django_adelaidex', 'templates' ),
     )
 
+Test
+----
+
+To run the tests::
+
+    python manage.py test
+
+
+Build
+-----
+
+To build the pip package::
+
+   python setup.py sdist
+

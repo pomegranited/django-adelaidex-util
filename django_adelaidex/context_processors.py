@@ -5,7 +5,7 @@ def analytics(request):
     Adds static-related context variables to the context.
 
     """
-    return {'ALLOW_ANALYTICS': settings.ALLOW_ANALYTICS}
+    return {'ALLOW_ANALYTICS': getattr(settings, 'ALLOW_ANALYTICS', False)}
 
 def referer(request):
     """
