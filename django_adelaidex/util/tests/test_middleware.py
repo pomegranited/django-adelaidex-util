@@ -7,8 +7,8 @@ from exceptions import Exception
 from StringIO import StringIO
 from mock import Mock
 
-from django_adelaidex.test import UserSetUp
-from django_adelaidex.middleware import WsgiLogErrors, P3PMiddleware
+from django_adelaidex.util.test import UserSetUp
+from django_adelaidex.util.middleware import WsgiLogErrors, P3PMiddleware
 
 class WsgiLogErrorsTest(TestCase):
 

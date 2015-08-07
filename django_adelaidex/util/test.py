@@ -3,13 +3,10 @@ from django.test.runner import DiscoverRunner
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
-from django.utils.importlib import import_module
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities    
-
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.common.exceptions import NoSuchElementException
-from pyvirtualdisplay import Display
 
 import os
 import re
@@ -17,6 +14,8 @@ import sys
 import time
 import urllib
 from contextlib import contextmanager
+from importlib import import_module
+from pyvirtualdisplay import Display
 
 
 class ExcludeAppsTestSuiteRunner(DiscoverRunner):

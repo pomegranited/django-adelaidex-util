@@ -1,5 +1,4 @@
 include LICENSE
 include README.rst
-recursive-include docs *
-recursive-include django_adelaidex/templates *
-recursive-include django_adelaidex/templatetags *
+recursive-include django_adelaidex/util/templates *
+recursive-include django_adelaidex/util/templatetags *

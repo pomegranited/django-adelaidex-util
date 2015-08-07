@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 import re
 
-from django_adelaidex.templatetags import pagination
+from django_adelaidex.util.templatetags import pagination
 
 # ref https://github.com/django/django/blob/master/django/contrib/flatpages/tests/test_templatetags.py
 class DictFilterTests(TestCase):

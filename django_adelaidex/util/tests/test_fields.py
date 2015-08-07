@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django_adelaidex.fields import NullableCharField
+from django_adelaidex.util.fields import NullableCharField
 
 
 class NullableCharFieldTest(TestCase):

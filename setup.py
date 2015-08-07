@@ -8,9 +8,9 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-adelaidex',
+    name='django-adelaidex-util',
     version='0.1',
-    packages=['django_adelaidex'],
+    packages=['django_adelaidex', 'django_adelaidex.util'],
     include_package_data=True,
     license='Copyright The University of Adelaide, All rights reserved',
     description='Utilities used by the AdelaideX Django applications',
