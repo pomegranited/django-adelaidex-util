@@ -19,6 +19,7 @@ DATABASES = {
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django_adelaidex.util',
 )   
 
@@ -31,9 +32,16 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'tests', 'templates'),
 )
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
     'django_adelaidex.util.context_processors.analytics',
     'django_adelaidex.util.context_processors.referer',
     'django_adelaidex.util.context_processors.base_url',
+)
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'tests', 'static', 'gen')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'tests', 'static'),
 )
 
 ROOT_URLCONF = 'django_adelaidex.util.tests.urls'

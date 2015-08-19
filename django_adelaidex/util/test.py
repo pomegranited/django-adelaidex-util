@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.runner import DiscoverRunner
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -168,7 +168,7 @@ class TestOverrideSettings(object):
         return import_module(settings.ROOT_URLCONF)
 
 
-class SeleniumTestCase(UserSetUp, LiveServerTestCase):
+class SeleniumTestCase(UserSetUp, StaticLiveServerTestCase):
     """Run live server integration tests.  Requires running xvfb service."""
 
     @classmethod
