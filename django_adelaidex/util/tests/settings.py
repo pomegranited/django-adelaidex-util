@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'django_adelaidex.util',
+    'django_adelaidex.util.tests',
 )   
 
 MIDDLEWARE_CLASSES = (
