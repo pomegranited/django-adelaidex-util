@@ -1,4 +1,3 @@
---extra-index-url http://lti-adx.adelaide.edu.au/pypi/
 Django>=1.7
 pytz>=2015.2
 selenium>=2.44.0
