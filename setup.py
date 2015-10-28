@@ -35,7 +35,7 @@ setup(
     tests_require=[
         'selenium>=2.44.0',
         'PyVirtualDisplay>=0.1.5',
-        'mock',
+        'mock==1.0.1',
     ],
     zip_safe=False,
 )

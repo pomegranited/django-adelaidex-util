@@ -46,7 +46,7 @@ To set up the virtualenv::
 
     virtualenv .virtualenv
     source .virtualenv/bin/activate
-    pip install --extra-index-url=http://lti-adx.adelaide.edu.au/pypi/ -U -r django_adelaidex/util/tests/pip.txt 
+    pip install -U -r django_adelaidex/util/tests/pip.txt
 
 To run the tests::
 
