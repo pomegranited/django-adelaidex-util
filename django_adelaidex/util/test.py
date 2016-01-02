@@ -1,7 +1,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test.runner import DiscoverRunner
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, clear_url_caches
 from django.contrib.auth import get_user_model
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities    
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -13,10 +13,15 @@ import re
 import sys
 import time
 import urllib
+import logging
 from contextlib import contextmanager
 from importlib import import_module
 from pyvirtualdisplay import Display
 
+def quiet_django_request():
+    # Quiet the django.request logging, which is set to INFO for some reason.
+    req_logger = logging.getLogger('django.request')
+    req_logger.setLevel(logging.CRITICAL)
 
 class ExcludeAppsTestSuiteRunner(DiscoverRunner):
     EXCLUDED_APPS = getattr(settings, 'TEST_EXCLUDE', [])
@@ -59,6 +64,8 @@ class UserSetUp(object):
         self.super_user.is_staff = True
         self.super_user.set_password(self.super_password)
         self.super_user.save()
+
+        quiet_django_request()
 
     def get_username(self, user='default'):
         if user == 'staff':
@@ -165,6 +172,8 @@ class TestOverrideSettings(object):
             except ImportError:
                 pass # ignore
 
+        clear_url_caches()
+
         return import_module(settings.ROOT_URLCONF)
 
 
@@ -189,6 +198,8 @@ class SeleniumTestCase(UserSetUp, StaticLiveServerTestCase):
         cls.display = Display(visible=0, size=(800, 600))
         cls.display.start()
         super(SeleniumTestCase, cls).setUpClass()
+
+        quiet_django_request()
 
     @classmethod
     def tearDownClass(cls):

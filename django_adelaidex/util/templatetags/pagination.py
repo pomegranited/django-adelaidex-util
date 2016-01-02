@@ -9,9 +9,9 @@ def pagination(page, begin_pages=2, end_pages=2, before_current_pages=3, after_c
     before = max(page.number - before_current_pages - 1, 0)
     after = page.number + after_current_pages
 
-    begin = page.paginator.page_range[:begin_pages]
-    middle = page.paginator.page_range[before:after]
-    end = page.paginator.page_range[-end_pages:]
+    begin = list(page.paginator.page_range)[:begin_pages]
+    middle = list(page.paginator.page_range)[before:after]
+    end = list(page.paginator.page_range)[-end_pages:]
     last_page_number = end[-1]
 
     def collides(firstlist, secondlist):

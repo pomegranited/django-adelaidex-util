@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-adelaidex-util',
-    version='0.3',
+    version='0.4',
     packages=['django_adelaidex', 'django_adelaidex.util'],
     include_package_data=True,
     license='Copyright The University of Adelaide, All rights reserved',
@@ -29,7 +29,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=[
-        'Django>=1.7',
+        'Django>=1.7,<1.10',
         'pytz>=2015.2',
     ],
     tests_require=[

@@ -29,15 +29,23 @@ MIDDLEWARE_CLASSES = (
     'django_adelaidex.util.middleware.P3PMiddleware',
 )
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'tests', 'templates'),
-)
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.static',
-    'django_adelaidex.util.context_processors.analytics',
-    'django_adelaidex.util.context_processors.referer',
-    'django_adelaidex.util.context_processors.base_url',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'tests', 'templates'), 
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.static',
+                'django_adelaidex.util.context_processors.analytics',
+                'django_adelaidex.util.context_processors.referer',
+                'django_adelaidex.util.context_processors.base_url',
+            ],
+        },
+    },
+]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'tests', 'static', 'gen')
