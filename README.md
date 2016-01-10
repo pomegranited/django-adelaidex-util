@@ -6,38 +6,37 @@ Utilities used by the AdelaideX Django applications.
 Usage
 -----
 
-1. If you wish to use the django\_adelaidex.templatetags, add django\_adelaidex
-   to your settings.INSTALLED\_APPS::
+1. If you wish to use the `django_adelaidex.templatetags`, add `django_adelaidex`
+   to your `settings.INSTALLED_APPS`.
 
-    INSTALLED_APPS = ( 
-        ... 
-        'django_adelaidex.util', 
-    )
+        INSTALLED_APPS = ( 
+            'django_adelaidex.util', 
+            ... 
+        )
 
-2. Optionally add django\_adelaidex.middleware to MIDDLEWARE\_CLASSES::
+2. Optionally add `django_adelaidex.middleware` to `settings.MIDDLEWARE_CLASSES`.
 
-    MIDDLEWARE_CLASSES = ( 
-        'django_adelaidex.util.middleware.WsgiLogErrors', # listed first, so we can see all errors 
-        ...
-        'django_adelaidex.util.middleware.P3PMiddleware',
-    )
+        MIDDLEWARE_CLASSES = ( 
+            'django_adelaidex.util.middleware.WsgiLogErrors', # list first, so we can see all errors 
+            ...
+            'django_adelaidex.util.middleware.P3PMiddleware',
+        )
 
-3. Optionally add django\_adelaidex.context\_processors to TEMPLATE\_CONTEXT\_PROCESSORS::
+3. Optionally add `django_adelaidex.context_processors` to `settings.TEMPLATES`.
 
-    TEMPLATE_CONTEXT_PROCESSORS = ( 
-        ...
-        'django_adelaidex.util.context_processors.analytics',
-        'django_adelaidex.util.context_processors.referer',
-        'django_adelaidex.util.context_processors.base_url', 
-    )
-
-4. If you plan to use django_adelaidex.util.templatetags, append this to your TEMPLATE_DIRS::
-
-    TEMPLATE_DIRS = (
-        ...
-        # TODO Hopefully fixed in Django 1.8
-        os.path.join( SITE_PACKAGES_INSTALL_DIR, 'django_adelaidex', 'util', 'templates' ),
-    )
+        TEMPLATES = [
+            {
+                ...
+                'OPTIONS': {
+                    'context_processors': [
+                        'django_adelaidex.util.context_processors.analytics',
+                        'django_adelaidex.util.context_processors.referer',
+                        'django_adelaidex.util.context_processors.base_url', 
+                        ... 
+                    ],
+                },
+            },
+        ] 
 
 Test
 ----
@@ -84,5 +83,5 @@ Build
 
 To build the pip package::
 
-   python setup.py sdist
+    python setup.py sdist
 
