@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-adelaidex-util',
-    version='0.4.1',
+    version='0.4.2',
     packages=['django_adelaidex', 'django_adelaidex.util'],
     include_package_data=True,
     license='Copyright The University of Adelaide, All rights reserved',

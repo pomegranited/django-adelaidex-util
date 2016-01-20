@@ -274,13 +274,9 @@ class SeleniumTestCase(UserSetUp, StaticLiveServerTestCase):
 
         self.selenium.find_element_by_id('id_username').send_keys(self.get_username(user))
         self.selenium.find_element_by_id('id_password').send_keys(self.get_password(user))
-
-        buttons = self.selenium.find_elements_by_tag_name('button')
+        buttons = self.selenium.find_elements_by_css_selector('#login')
         if not len(buttons):
-            inputs = self.selenium.find_elements_by_tag_name('input')
-            for i in inputs:
-                if i.get_attribute('type') == 'submit':
-                    buttons.append(i)
+            buttons = self.selenium.find_elements_by_css_selector('input[type=submit]')
         buttons[0].click()
 
 
